@@ -1,58 +1,16 @@
-  <!-- RANDOM STUFF -->
-  <div class=" container my-1" style="background-color: rgb(4,67,67);"><p class="text-light ms-1 fs-5 py-2 ">Vegetables</p></div>
-  <div class="container">
-    <div class=" d-inline-block mx-4 my-2">
-      <img src="https://media.giphy.com/media/26gs9jTY1R02ueEnu/giphy.gif" width="240" height="240" /><br>
-    </div>
-    <div class=" d-inline-block mx-4 my-2">
-      <img  src="https://media.giphy.com/media/QHsMhRci6hfSqerbXy/giphy.gif" width="240" height="240" />
-    </div>
-    <div class=" d-inline-block mx-4 my-2">
-      <img src="https://media.giphy.com/media/26gs9jTY1R02ueEnu/giphy.gif" width="240" height="240" /><br>
-    </div>
-    <div class=" d-inline-block mx-4 my-2">
-      <img  src="https://media.giphy.com/media/QHsMhRci6hfSqerbXy/giphy.gif" width="240" height="240" />
-    </div>
-    <div class=" d-inline-block mx-4 my-2">
-      <img src="https://media.giphy.com/media/26gs9jTY1R02ueEnu/giphy.gif" width="240" height="240" /><br>
-    </div>
-    <div class=" d-inline-block mx-4 my-2">
-      <img  src="https://media.giphy.com/media/QHsMhRci6hfSqerbXy/giphy.gif" width="240" height="240" />
-    </div>
-    <div class=" d-inline-block mx-4 my-2">
-      <img src="https://media.giphy.com/media/26gs9jTY1R02ueEnu/giphy.gif" width="240" height="240" /><br>
-    </div>
-    <div class=" d-inline-block mx-4 my-2">
-      <img  src="https://media.giphy.com/media/QHsMhRci6hfSqerbXy/giphy.gif" width="240" height="240" />
-    </div>
-    </div>
+<div class="container my-5">
+  <div class="row  row-cols-md-3 row-cols-sm-2 row-cols-2 g-3 g-md-5">
+      <div class="col" *ngFor = "let product of productsArray">
+          <div class="card">
+              <div class="card-body text-center">
+                  <img [src]="product.productImage" alt = "image" height="220px"  class="card-img-top">
+                  <div class="card-title  fw-bold my-2">{{product.productName}}</div>
+                  <button class="btn btn-info m-2" (click)="specifications(product?.productId)">Specifications</button>
+                  <button class="btn btn-warning m-2" (click)="addtocart(product)">Add to Cart</button>
+              </div>
+            </div>
+      </div>
+  </div>
+</div>
   
-    <!-- RANDOM STUFF -->
-  <div class="container my-1" style="background-color: rgb(4,67,67);"><p class="text-light ms-1 fs-5 py-2 ">Fruits</p></div>
-  <div class="container">
-    <div class=" d-inline-block mx-4 my-2">
-      <img src="https://media.giphy.com/media/26gs9jTY1R02ueEnu/giphy.gif" width="240" height="240" /><br>
-    </div>
-    <div class=" d-inline-block mx-4 my-2">
-      <img  src="https://media.giphy.com/media/QHsMhRci6hfSqerbXy/giphy.gif" width="240" height="240" />
-    </div>
-    <div class=" d-inline-block mx-4 my-2">
-      <img src="https://media.giphy.com/media/26gs9jTY1R02ueEnu/giphy.gif" width="240" height="240" /><br>
-    </div>
-    <div class=" d-inline-block mx-4 my-2">
-      <img  src="https://media.giphy.com/media/QHsMhRci6hfSqerbXy/giphy.gif" width="240" height="240" />
-    </div>
-    <div class=" d-inline-block mx-4 my-2">
-      <img src="https://media.giphy.com/media/26gs9jTY1R02ueEnu/giphy.gif" width="240" height="240" /><br>
-    </div>
-    <div class=" d-inline-block mx-4 my-2">
-      <img  src="https://media.giphy.com/media/QHsMhRci6hfSqerbXy/giphy.gif" width="240" height="240" />
-    </div>
-    <div class=" d-inline-block mx-4 my-2">
-      <img src="https://media.giphy.com/media/26gs9jTY1R02ueEnu/giphy.gif" width="240" height="240" /><br>
-    </div>
-    <div class=" d-inline-block mx-4 my-2">
-      <img  src="https://media.giphy.com/media/QHsMhRci6hfSqerbXy/giphy.gif" width="240" height="240" />
-    </div>
-    </div>
   
