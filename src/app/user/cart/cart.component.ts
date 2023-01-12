@@ -64,15 +64,16 @@ export class CartComponent implements OnInit {
     //actual code
     let found = false;
     for (let item of this.cart) {
+      found = false;
       for (let product of this.productsArray) {
         if (item.productId == product.productId) {
           product.quantity = item.quantity;
           this.cartsArray.push(product);
           found = true;
-          break;
-        }
+        } 
       }
       if (!found) {
+        console.log("from not found",item)
         this.notFoundItems.push(item);
       }
     }
@@ -85,7 +86,7 @@ export class CartComponent implements OnInit {
       .removeQuantity(this.userName, product.productId)
       .subscribe((res) => {
         if (res['message'] == 'Reduced Quantity') {
-          this.toastr.success('Reduced Quantity of Item successfully');
+          this.toastr.success('  ','Reduced Quantity of Item successfully');
           product.quantity -= 1;
         } else if (
           res['message'] == 'Product deleted from the cart Successful'
@@ -122,7 +123,7 @@ export class CartComponent implements OnInit {
     if (CartObj.userName) {
       this.us.addToCart(CartObj).subscribe((res) => {
         if (res['message'] == 'Product quantity updated') {
-          this.toastr.success('Added product quantity successfully');
+          this.toastr.success(' ','Added product quantity successfully');
           product.quantity += 1;
         } else if (res['message'] == 'Unauthorised access') {
           this.toastr.warning('Unauthorised access', 'Please login to access');
@@ -154,7 +155,7 @@ export class CartComponent implements OnInit {
       .removeCartItem(this.userName, product.productId)
       .subscribe((res) => {
         if (res['message'] == 'Product deleted from the cart Successful') {
-          this.toastr.success('Product deleted from the cart Successfully');
+          this.toastr.success('  ','Product deleted from the cart Successfully');
           //DOM
           let index = this.cartsArray.findIndex((x) => x == product);
           console.log(index);
@@ -203,7 +204,6 @@ export class CartComponent implements OnInit {
     cartObj['orderStatus'] = false;
     cartObj['total'] = this.sum;
     //console.log(cartObj)
-
     this.os.storeCart(cartObj);
     this.router.navigateByUrl('/user/checkout');
   }

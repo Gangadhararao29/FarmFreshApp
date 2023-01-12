@@ -20,9 +20,6 @@ export class UserService {
   loginUser(loginObj): Observable<any> {
     return this.hc.post('/user/login', loginObj);
   }
-  addProduct(productObj): Observable<any> {
-    return this.hc.post('/product/addproduct', productObj);
-  }
   checkUser(userName): Observable<any> {
     return this.hc.post('/user/checkuser', userName);
   }
@@ -49,5 +46,8 @@ export class UserService {
   }
   resetCart(userName): Observable<any> {
     return this.hc.post(`/user/resetcart/${userName}`, '');
+  }
+  changePassword(userName,pwdObj): Observable<any> {
+    return this.hc.post(`/user/changepassword/${userName}`, pwdObj);
   }
 }

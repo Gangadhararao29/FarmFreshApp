@@ -42,7 +42,7 @@ export class SearchComponent implements OnInit {
     if (CartObj.userName) {
       this.us.addToCart(CartObj).subscribe((res) => {
         if (res['message'] == 'Product added to the cart Successful') {
-          this.toastr.success('Product added to the cart Successful');
+          this.toastr.success('  ','Product added to the cart Successful');
         } else if (res['message'] == 'Product quantity updated') {
           this.toastr.success(
             'Product quantity updated',
@@ -69,5 +69,25 @@ export class SearchComponent implements OnInit {
       // this.cs.setNum(this.num)
       this.cs.setNum(res['message'] + 1);
     });
+  }
+
+  details(id) {
+    let user = localStorage.getItem('userName');
+    if (user) {
+      let userObject = {
+        userName: '',
+      };
+      userObject.userName = user;
+
+      this.us.checkAdminUser(userObject).subscribe((res) => {
+        if (res['message'] == 'User is Admin') {
+          this.router.navigateByUrl(`admin/productdetails/${id}`);
+        } else {
+          this.router.navigateByUrl(`user/productdetails/${id}`);
+        }
+      });
+    } else {
+      this.router.navigateByUrl(`/productdetails/${id}`);
+    }
   }
 }

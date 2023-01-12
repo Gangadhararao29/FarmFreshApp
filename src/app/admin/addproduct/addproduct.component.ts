@@ -1,7 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { UserService } from '../../../../services/user.service';
+import { ProductService } from 'services/product.service';
+
 
 @Component({
   selector: 'app-addproduct',
@@ -10,7 +11,7 @@ import { UserService } from '../../../../services/user.service';
 })
 export class AddproductComponent implements OnInit {
   constructor(
-    private us: UserService,
+    private ps:ProductService,
     private router: Router,
     private toastr: ToastrService
   ) {}
@@ -22,23 +23,20 @@ export class AddproductComponent implements OnInit {
     //console.log('file', this.file);
   }
 
-  submitUserData(userObj) {
-    if (userObj.valid) {
+  submitProductData(productObj) {
+    if (productObj.valid) {
       let formData = new FormData();
-      console.log(userObj)
+      //console.log(productObj)
       //adding image and other data to FormData object
       formData.append('photo', this.file, this.file.name);
-      formData.append('userObj', JSON.stringify(userObj.value));
+      formData.append('productObj', JSON.stringify(productObj.value));
 
-      this.us.addProduct(formData).subscribe(
+      this.ps.addProduct(formData).subscribe(
         (res) => {
           // console.log(res['message'])
           if (res['message'] == 'Product added') {
             this.toastr.success('Product added Successfully');
-            userObj.reset();
-           // this.photoRef.nativeElement.value = '';
-            //navigate to add product
-            // this.router.navigateByUrl("/admin/home")
+            productObj.reset();
           } else if (res['message'] == 'Unauthorised access') {
             this.toastr.warning(
               'Unauthorised access',
