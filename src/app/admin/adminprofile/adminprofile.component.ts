@@ -1,7 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { UserService } from 'services/user.service';
+import { UserService } from '../../../services/user.service';
+
 
 @Component({
   selector: 'app-adminprofile',

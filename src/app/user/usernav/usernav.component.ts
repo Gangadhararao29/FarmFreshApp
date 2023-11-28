@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CartService } from 'services/cart.service';
-import { UserService } from 'services/user.service';
+import { CartService } from '../../../services/cart.service';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-usernav',

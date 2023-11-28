@@ -26,7 +26,6 @@ import { EditproductComponent } from './admin/editproduct/editproduct.component'
 import { UpdatepricesComponent } from './admin/updateprices/updateprices.component';
 import { ProductdetailsComponent } from './products/productdetails/productdetails.component';
 import { EditdetailsComponent } from './admin/editdetails/editdetails.component';
-import { AuthorisationService } from 'services/authorisation.service';
 import { ToastrModule } from 'ngx-toastr';
 
 import { SearchFilterPipe } from './search/search-filter.pipe';
@@ -34,6 +33,7 @@ import { UserprofileComponent } from './user/userprofile/userprofile.component';
 import { CheckoutComponent } from './user/cart/checkout/checkout.component';
 import { PaymentComponent } from './user/cart/payment/payment.component';
 import { AdminprofileComponent } from './admin/adminprofile/adminprofile.component';
+import { AuthorisationService } from '../services/authorisation.service';
 
 @NgModule({
   declarations: [

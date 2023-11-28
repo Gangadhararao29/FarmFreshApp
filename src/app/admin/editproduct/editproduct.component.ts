@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { ProductService } from 'services/product.service';
+import { ProductService } from '../../../services/product.service';
 
 @Component({
   selector: 'app-editproduct',

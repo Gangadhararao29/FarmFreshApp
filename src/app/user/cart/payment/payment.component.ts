@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { OrderService } from 'services/order.service';
-import { UserService } from 'services/user.service';
+import { OrderService } from '../../../../services/order.service';
+import { UserService } from '../../../../services/user.service';
+
 
 @Component({
   selector: 'app-payment',

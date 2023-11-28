@@ -1,8 +1,7 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { ProductService } from 'services/product.service';
-
+import { ProductService } from '../../../services/product.service';
 
 @Component({
   selector: 'app-addproduct',
@@ -10,14 +9,16 @@ import { ProductService } from 'services/product.service';
   styleUrls: ['./addproduct.component.css'],
 })
 export class AddproductComponent implements OnInit {
+  file: File;
+
   constructor(
-    private ps:ProductService,
+    private ps: ProductService,
     private router: Router,
     private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {}
-  file: File;
+
   incomingfile(event) {
     this.file = event.target.files[0];
     //console.log('file', this.file);
@@ -31,8 +32,8 @@ export class AddproductComponent implements OnInit {
       formData.append('photo', this.file, this.file.name);
       formData.append('productObj', JSON.stringify(productObj.value));
 
-      this.ps.addProduct(formData).subscribe(
-        (res) => {
+      this.ps.addProduct(formData).subscribe({
+        next: (res) => {
           // console.log(res['message'])
           if (res['message'] == 'Product added') {
             this.toastr.success('Product added Successfully');
@@ -53,11 +54,11 @@ export class AddproductComponent implements OnInit {
             this.toastr.warning(res['message']);
           }
         },
-        (err) => {
+        error: (err) => {
           this.toastr.warning('Something went wrong');
           console.log(err);
-        }
-      );
+        },
+      });
     } else {
       this.toastr.warning(
         'Please fill all the details in their respective fields'
