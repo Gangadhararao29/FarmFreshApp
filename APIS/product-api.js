@@ -34,7 +34,7 @@ var upload = multer({ storage: storage })
 
 //create a product
 productApiObj.post("/addproduct", validateToken, upload.single('photo'), errorHandler(async (req, res) => {
-    //console.log("url path is ",req.file.path); 
+    //console.log("url path is ",req.file.path);
     let productObj = JSON.parse(req.body.productObj);
     productObj.productImage = req.file.path;
     //Adding unique Id to the productObj
@@ -48,7 +48,7 @@ productApiObj.post("/addproduct", validateToken, upload.single('photo'), errorHa
         //create a new object
         let newProductObj = new Product(productObj)
         //console.log(newProductObj)
-        //save it 
+        //save it
         await newProductObj.save()
         res.send({ message: "Product added" })
     }
@@ -62,7 +62,7 @@ productApiObj.post("/addproduct", validateToken, upload.single('photo'), errorHa
 productApiObj.get("/getproducts", errorHandler(async (req, res) => {
     //get all products from db
     let productsArray = await Product.find({ "status": true })
-    res.send({ message: productsArray })
+    res.send( productsArray || [])
 }))
 
 //update all prices (admin)
@@ -86,7 +86,7 @@ productApiObj.post('/deleteproduct', validateToken, errorHandler(async (req, res
 //productDetails page || get product by id
 productApiObj.get('/getproduct/:id', errorHandler(async (req, res) => {
     const product = await Product.findOne({ 'productId': req.params.id })
-    res.send({ product })
+    res.send( product || {})
 }))
 
 
@@ -107,9 +107,8 @@ productApiObj.post('/addproductreview', validateToken, errorHandler(async (req, 
     const reviewObj = await Product.findOne({ "productId": req.body.productId, productReview: { $elemMatch: { userName: req.body.userName } } })
 
     if (reviewObj == null) {
-
-        const newReview = await Product.findOneAndUpdate({ "productId": req.body.productId },
-            { $push: { "productReview": { userName: req.body.userName, productRating: req.body.productRating, productComments: req.body.productComments } } }, { returnOriginal: false, upsert: true, new: true })
+       await Product.findOneAndUpdate({ "productId": req.body.productId },
+            { $push: { "productReview": { userName: req.body.userName, productRating: req.body.productRating, productComments: req.body.productComments, reviewDate: Date.now() } } }, { returnOriginal: false, upsert: true, new: true })
 
         res.send({ message: "Product review submitted" })
         // console.log('reviewObj',cartObj)
@@ -120,6 +119,7 @@ productApiObj.post('/addproductreview', validateToken, errorHandler(async (req, 
             if (review.userName == req.body.userName) {
                 review.productRating = req.body.productRating;
                 review.productComments = req.body.productComments;
+                review.reviewDate = Date.now();
             }
         }
         await reviewObj.save();

@@ -5,7 +5,6 @@ import { CartService } from '../../services/cart.service';
 import { ProductService } from '../../services/product.service';
 import { UserService } from '../../services/user.service';
 
-
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -31,33 +30,25 @@ export class ProductsComponent implements OnInit {
   ngOnInit(): void {
     this.ps.getProducts().subscribe((res) => {
       // console.log("mes1",res['message'])
-      this.productsArray = res['message'];
+      this.productsArray = res;
       // console.log("mes2",this.productsArray)
 
-      // Organic and Inorganic
-      this.productsOrgainc = this.productsArray.filter((item) => {
-        return item.productBrand == 'Organic';
-      });
-      this.productsInorgainc = this.productsArray.filter((item) => {
-        return item.productBrand == 'Inorganic';
-      });
-
-      this.productsOrgaincFruits = this.productsOrgainc.filter((item) => {
-        return item.productCategory == 'Fruits';
-      });
-
-      this.productsOrgaincVegetables = this.productsOrgainc.filter((item) => {
-        return item.productCategory == 'Vegetables';
-      });
-      this.productsInorgaincFruits = this.productsInorgainc.filter((item) => {
-        return item.productCategory == 'Fruits';
-      });
-
-      this.productsInorgaincVegetables = this.productsInorgainc.filter(
-        (item) => {
-          return item.productCategory == 'Vegetables';
+      // Organic and Inorganic products separation
+      this.productsArray.forEach((product) => {
+        if (product.productBrand == 'Organic') {
+          if (product.productCategory == 'Fruits') {
+            this.productsOrgaincFruits.push(product);
+          } else if (product.productCategory == 'Vegetables') {
+            this.productsOrgaincVegetables.push(product);
+          }
+        } else if (product.productBrand == 'Inorganic') {
+          if (product.productCategory == 'Fruits') {
+            this.productsInorgaincFruits.push(product);
+          } else if (product.productCategory == 'Vegetables') {
+            this.productsInorgaincVegetables.push(product);
+          }
         }
-      );
+      });
       // console.log("mes3",this.productsOrgainc)
       // console.log("mes4",this.productsInorgainc)
       // console.log("mes5",this.productsOrgaincFruits)

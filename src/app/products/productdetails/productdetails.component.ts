@@ -5,7 +5,6 @@ import { CartService } from '../../../services/cart.service';
 import { ProductService } from '../../../services/product.service';
 import { UserService } from '../../../services/user.service';
 
-
 @Component({
   selector: 'app-productdetails',
   templateUrl: './productdetails.component.html',
@@ -28,7 +27,7 @@ export class ProductdetailsComponent implements OnInit {
   ngOnInit(): void {
     this.ar.params.subscribe((data) => {
       this.ps.getProductById(data.id).subscribe((obj) => {
-        this.product = obj.product;
+        this.product = obj;
         this.overallRating =
           this.product?.productReview.reduce(
             (prev, curr) => prev + curr.productRating,
@@ -111,10 +110,10 @@ export class ProductdetailsComponent implements OnInit {
     });
   }
 
-  generateRandomDate() {
-    const date = 1 + Math.round(Math.random() * 29);
-    const month = 1 + Math.round(Math.random() * 11);
-    const year = Math.round(2022 - Math.random() * 2);
-    return date + '/' + month + '/' + year;
-  }
+  // generateRandomDate() {
+  //   const date = 1 + Math.round(Math.random() * 29);
+  //   const month = 1 + Math.round(Math.random() * 11);
+  //   const year = Math.round(2022 - Math.random() * 2);
+  //   return date + '/' + month + '/' + year;
+  // }
 }

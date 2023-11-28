@@ -9,16 +9,16 @@ const validateToken = (req, res, next) => {
     token = tokenWithBearer.slice(7, tokenWithBearer.length);
     jwt.verify(token, process.env.SECRET, (err, decodedToken) => {
       if (err) {
-        res.send({ message: 'Session Expired' })
+        res.send({ message: "Session Expired" });
       } else {
         if (req.body.userName && req.body.userName !== decodedToken.userName) {
-          res.send({ message: 'Unauthorised access' })
+          res.send({ message: "Unauthorised access" });
         }
         next();
       }
-    })
+    });
   } else {
-    res.send({ message: "Unauthorised access" })
+    res.send({ message: "Unauthorised access" });
   }
 };
 

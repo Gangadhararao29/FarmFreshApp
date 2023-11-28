@@ -25,7 +25,7 @@ export class SearchComponent implements OnInit {
   ngOnInit(): void {
     this.ps.getProducts().subscribe((res) => {
       // console.log("mes1",res['message'])
-      this.productsArray = res['message'];
+      this.productsArray = res;
     });
   }
 

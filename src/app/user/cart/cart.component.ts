@@ -32,7 +32,7 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): void {
     this.ps.getProducts().subscribe((res) => {
-      this.productsArray = res['message'];
+      this.productsArray = res;
     });
 
     this.us.getCart(this.userName).subscribe((res) => {

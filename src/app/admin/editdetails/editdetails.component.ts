@@ -21,7 +21,7 @@ export class EditdetailsComponent implements OnInit {
   ngOnInit(): void {
     this.ar.params.subscribe((data) => {
       this.ps.getProductById(data.id).subscribe((obj) => {
-        this.product = obj.product;
+        this.product = obj;
         //  console.log("product ngonint",this.product);
       });
     });
